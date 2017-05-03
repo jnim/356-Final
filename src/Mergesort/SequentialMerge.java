@@ -2,7 +2,8 @@ package Mergesort;
 
 import java.util.Arrays;
 
-public class SequentialMerge {
+public class SequentialMerge{
+
   /* 
   split an array into two: left and right
   recursively sorted via the algorithm
