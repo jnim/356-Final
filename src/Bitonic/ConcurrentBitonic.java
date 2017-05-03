@@ -1,4 +1,4 @@
-package Bitonicsort;
+package Bitonic;
 
 public class ConcurrentBitonic {
 
