@@ -16,8 +16,8 @@ class SequentialBitonic{
 	
 	static int BitonicSort(int[] array, int start, int end, int increment, boolean increasing){
 		if (increment>=1){
-			BitonicSort(array, start, start+(increment/2), increment/2, increasing); 
-			BitonicSort(array, start+(increment/2), end, increment/2, !increasing);
+			BitonicSort(array, start, start+(increment), increment/2, increasing); 
+			BitonicSort(array, start+(increment), end, increment/2, !increasing);
 			BitonicMerge(array, start, end, increment, increasing); 
 			
 		}
@@ -33,10 +33,11 @@ class SequentialBitonic{
 					array[i] = array[i + count]; 
 					array[i+count] = temp; 
 				}
-					i++; 
+					i++; //move index up 1 to compare next pair
 				
 			}
-			count = count/2; 
+			count = count/2; //at this point, we have reached the end of the segment we want to compare with the previous increment 
+			//e.g. - we have compared all pairs in a given segment that are 2 apart. so we decrease the increment and move on. 
 			
 		}
 	
@@ -51,4 +52,10 @@ class SequentialBitonic{
 			
 		}
 	}
+	public void main(){
+		int[] a = {4, 3, 2, 1};
+		SequentialBitonic Bit = new SequentialBitonic(a); 
+		sort(Bit, true); 
+		Bit.print(); 
+		}
 }
