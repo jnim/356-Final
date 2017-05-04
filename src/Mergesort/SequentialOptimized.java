@@ -6,9 +6,9 @@ public class SequentialOptimized {
 //optimize will happen in one array initialized in the class, rather than creating a new array (combined) in every single merge
 	static int[] arrayformerge;
 	public static int[] sort(int[] aList, int start, int end) {
-	    int length = aList.length;
-	    if (length == 1) return aList; // when it is an array of 1, then we know that it is ready to merge
-	    int midpoint = length / 2;
+	    int length = end-start;
+	    if (length == 0) return aList; // when it is an array of 1, then we know that it is ready to merge
+	    int midpoint = start + length / 2;
 	    
 	    //int[] left = Arrays.copyOfRange(aList, 0, midpoint);
 	    /*System.out.println("left " + Arrays.toString(left));
@@ -16,7 +16,7 @@ public class SequentialOptimized {
 	    System.out.println("right " + Arrays.toString(right));
 	    */
 	    sort(aList, start, midpoint); 
-	    sort(aList, midpoint, end); 
+	    sort(aList, midpoint+1, end); 
 	    return merge(aList, start, midpoint, end);
 	  }
 	  
@@ -29,18 +29,16 @@ public class SequentialOptimized {
 	    int rightc = 0;
 	    for (int combinedc = 0; combinedc < length; combinedc++) {
 	      if (leftc > leftl) {
-	    	 
+	    	  
 	          rightc++;
 	      } else if (rightc >= rightl) {
-	    	 
+	    	  
 	          leftc++;
 	      } else if (left[leftc] <= right[rightc]) {
-	    	  int assign = left[leftc];
-		      combined[combinedc] = assign;
+	    	  
 		      leftc++;
 	      } else {
-	    	  int assign = right[rightc];
-	          combined[combinedc] = assign;
+	    	  
 	          rightc++;
 	    }
 	   
