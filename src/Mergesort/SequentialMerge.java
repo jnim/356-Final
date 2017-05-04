@@ -29,37 +29,22 @@ public class SequentialMerge{
     int leftc = 0;
     int rightc = 0;
     for (int combinedc = 0; combinedc < combined.length; combinedc++) {
-      //System.out.println("left[] " + Arrays.toString(left));
-      //System.out.println("right[] " + Arrays.toString(right));
-      //System.out.println("comb1 " + Arrays.toString(combined));
-	  //System.out.println(right[0]);
-	  //System.out.println(right[rightc]);
-	  //System.out.println(left[0]);
-	  //System.out.println(left[rightc]);
-      if (leftc >= left.length) {
+      if (leftc >= leftl) {
     	  int assign = right[rightc];
-    	  //System.out.println("1! " + assign);
           combined[combinedc] = assign;
           rightc++;
-          //System.out.println("comb2 " + Arrays.toString(combined));
-      } else if (rightc >= right.length) {
+      } else if (rightc >= rightl) {
     	  int assign = left[leftc];
-    	  //System.out.println("2! " + assign);
     	  combined[combinedc] = assign;
           leftc++;
-          //System.out.println("comb2 " + Arrays.toString(combined));
       } else if (left[leftc] <= right[rightc]) {
     	  int assign = left[leftc];
-    	  //System.out.println("3! " + assign);
 	      combined[combinedc] = assign;
 	      leftc++;
-	      //System.out.println("comb2 " + Arrays.toString(combined));
       } else {
     	  int assign = right[rightc];
-    	  //System.out.println("4! " + assign);
           combined[combinedc] = assign;
           rightc++;
-          //System.out.println("comb2 " + Arrays.toString(combined));
     }
    
   }
