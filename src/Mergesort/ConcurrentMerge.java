@@ -104,7 +104,6 @@ public class ConcurrentMerge extends Thread{
 	     System.out.println("orginal " + Arrays.toString(test));
 		 
 	     ConcurrentMerge test1 = new ConcurrentMerge(test);
-	     test1.start();
 	     test1.join();
 	     
 	     System.out.println("finished " + Arrays.toString(test));
