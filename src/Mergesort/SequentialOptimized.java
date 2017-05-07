@@ -8,7 +8,7 @@ public class SequentialOptimized {
 	public static int[] sort(int[] aList, int start, int end) {
 	    int length = end-start;
 	    if (length == 0) return aList; // when it is an array of 1, then we know that it is ready to merge
-	    int midpoint = start + length / 2;
+	    int midpoint = start + (end-start)/ 2;
 	    
 	    //int[] left = Arrays.copyOfRange(aList, 0, midpoint);
 	    /*System.out.println("left " + Arrays.toString(left));
@@ -21,31 +21,35 @@ public class SequentialOptimized {
 	  }
 	  
 	  public static int[] merge(int[] list, int start, int mid, int end) {
-		int leftl = mid-start+1; 
-		int rightl = end-mid; 
+		int leftlen = mid-start + 1; //not really the length, but the number of times we'll increment the counter
+		int rightlen = end-(mid+1);  //not really the length, but the number of times we'll increment the counter
 	    //int[] combined = new int[leftl + rightl]; don't need this since we have arrayformerge
-		int length = leftl + rightl; 
+		int length = leftlen + rightlen; 
 	    int leftc = 0;
 	    int rightc = 0;
-	    for (int combinedc = 0; combinedc < length; combinedc++) {
-	      if (leftc > leftl) {
-	    	  
-	          rightc++;
-	      } else if (rightc >= rightl) {
-	    	  
-	          leftc++;
-	      } else if (left[leftc] <= right[rightc]) {
-	    	  
-		      leftc++;
-	      } else {
-	    	  
-	          rightc++;
-	    }
-	   
+	    for (int combinedc = 0; combinedc <= length; combinedc++) {
+	    	if(rightc ==rightlen) {
+	    		arrayformerge[start + combinedc] = list[start+leftc]; 
+	    		leftc++;
+	    	}
+	    		else if(leftc == leftlen) {
+	    			arrayformerge[start + combinedc] = list[(mid + 1) + rightc];
+	    		leftc++; 
+	    		}
+	    	
+	    else if (list[start + leftc] <= list[(mid + 1) + rightc]) {
+	    	  arrayformerge[start + combinedc] = list[start + leftc];
+	    	  leftc++; 
+	      }else{
+	    	  arrayformerge[start+combinedc] = list[(mid + 1) + rightc]; 
+	    	  rightc++; 
+	      }
+	      
 	  }
-	    arraycopy(arrayformerge, start, list, start, length);
-	    return combined;
-	}
+	    
+	    System.arraycopy(arrayformerge, start, list, start, length); //http://stackoverflow.com/questions/7882074/how-do-you-set-one-arrays-values-to-another-arrays-values-in-java
+	    return list; 
+	  }
 
 	  public static void main(String args[]) {
 		  int[] test = {
