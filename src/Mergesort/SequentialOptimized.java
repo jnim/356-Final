@@ -4,13 +4,17 @@ import java.util.Arrays;
 
 public class SequentialOptimized {
 //optimize will happen in one array initialized in the class, rather than creating a new array (combined) in every single merge
-	int[] arrayformerge;
-	public SequentialOptimized(int size) {
-		this.arrayformerge = new int[size]; 
+	static int[] arrayformerge;
+	public SequentialOptimized(int[] alist) {
+		SequentialOptimized.arrayformerge = new int[alist.length]; 
 	}
-	public int[] sort(int[] aList, int start, int end) {
+	public int[] startsort(int[] list, int start, int end){
+		sort(list, start, end); 
+		return list; 
+	}
+	public static int[] sort(int[] list, int start, int end) {
 	    int length = end-start;
-	    if (length == 0) return aList; // when it is an array of 1, then we know that it is ready to merge
+	    if (length == 0) return list; // when it is an array of 1, then we know that it is ready to merge
 	    int midpoint = start + (end-start)/ 2;
 	    
 	    //int[] left = Arrays.copyOfRange(aList, 0, midpoint);
@@ -18,16 +22,16 @@ public class SequentialOptimized {
 	    int[] right = Arrays.copyOfRange(aList, midpoint, length);
 	    System.out.println("right " + Arrays.toString(right));
 	    */
-	    sort(aList, start, midpoint); 
-	    sort(aList, midpoint+1, end); 
-	    return merge(aList, start, midpoint, end);
-	  }
-	  
-	  public int[] merge(int[] list, int start, int mid, int end) {
-		int leftlen = mid-start; //not really the length, but the number of times we'll increment the counter
-		int rightlen = end-(mid+1);  //not really the length, but the number of times we'll increment the counter
+	    sort(list, start, midpoint); 
+	    sort(list, midpoint+1, end); 
+	    return merge(list, start, midpoint, end);
+	}
+	  ;
+	  public static int[] merge(int[] list, int start, int mid, int end) {
+		int leftlen = mid-start+1; //not really the length, but the number of times we'll increment the counter
+		int rightlen = end-(mid);  //not really the length, but the number of times we'll increment the counter
 	    //int[] combined = new int[leftl + rightl]; don't need this since we have arrayformerge
-		int length = leftlen + rightlen; 
+		int length = leftlen + rightlen;   
 	    int leftc = 0;
 	    int rightc = 0;
 	    for (int combinedc = 0; combinedc < length; combinedc++) {
@@ -50,7 +54,10 @@ public class SequentialOptimized {
 	      
 	  }
 	    
-	    System.arraycopy(arrayformerge, start, list, start, length); //http://stackoverflow.com/questions/7882074/how-do-you-set-one-arrays-values-to-another-arrays-values-in-java
+	    //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice?v=control
+	    for(int i = start; i<=end; i++){
+	    	list[i] = arrayformerge[i]; 
+	    }
 	    return list; 
 	  }
 
@@ -58,8 +65,9 @@ public class SequentialOptimized {
 		  int[] array = {
 				  1, 5, 2, 4, 3, 6, 7, 9
 		  };
-		  SequentialOptimized test = new SequentialOptimized(array.length); 
-		  int[] answer = test.sort(array, 0, (array.length -1)); 
+		   
+		  SequentialOptimized test = new SequentialOptimized(array); 
+		  int[] answer = test.startsort(array, 0, array.length); 
 		  System.out.println("test " + Arrays.toString(answer));
 	}
 
