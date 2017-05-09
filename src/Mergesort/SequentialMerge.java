@@ -1,9 +1,17 @@
 package Mergesort;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class SequentialMerge{
 
+
+//	private int[] array;
+//	
+//	public SequentialMerge(int[] anArray) {
+//		array = anArray;
+//	}
+	
   /* 
   split an array into two: left and right
   recursively sorted via the algorithm
@@ -16,9 +24,9 @@ public class SequentialMerge{
     int midpoint = length / 2;
     
     int[] left = Arrays.copyOfRange(aList, 0, midpoint);
-    System.out.println("left " + Arrays.toString(left));
+    //System.out.println("left " + Arrays.toString(left));
     int[] right = Arrays.copyOfRange(aList, midpoint, length);
-    System.out.println("right " + Arrays.toString(right));
+    //System.out.println("right " + Arrays.toString(right));
     return merge(sort(left), sort(right));
   }
   
@@ -52,10 +60,68 @@ public class SequentialMerge{
 }
 
   public static void main(String args[]) {
-	  int[] test = {
-			  1, 5, 2, 4, 3, 6, 7, 9
-	  };
-	  test = SequentialMerge.sort(test);
-	  System.out.println("test " + Arrays.toString(test));
+	  Random number = new Random();
+	     int[] test1 = new int[50000];
+	        for (int i = 0; i < test1.length; i++) {
+	            test1[i] = number.nextInt(1000);
+	        }
+	        
+     int[] test2 = new int[100000];
+     for (int i = 0; i < test2.length; i++) {
+         test2[i] = number.nextInt(1000);
+     }
+	      
+     int[] test3 = new int[150000];
+     for (int i = 0; i < test3.length; i++) {
+         test3[i] = number.nextInt(1000);
+     }
+     
+     int[] test4 = new int[200000];
+     for (int i = 0; i < test4.length; i++) {
+         test4[i] = number.nextInt(1000);
+     }
+     
+	    int[] test5 = new int[250000];
+	    for (int i = 0; i < test5.length; i++) {
+	        test5[i] = number.nextInt(1000);
+	    }
+	      
+	    int[] test6 = new int[300000];
+	    for (int i = 0; i < test6.length; i++) {
+	        test6[i] = number.nextInt(1000);
+	    }
+ 
+     
+	     long tStart = System.currentTimeMillis();
+	     System.out.println("orginal " + Arrays.toString(test1));
+		 test1 = SequentialMerge.sort(test1);
+	     System.out.println("finished " + Arrays.toString(test1));
+	     
+	     System.out.println("orginal " + Arrays.toString(test2));
+		 test2 = SequentialMerge.sort(test2);
+	     System.out.println("finished " + Arrays.toString(test2));
+	     
+	     System.out.println("orginal " + Arrays.toString(test3));
+		 test3 = SequentialMerge.sort(test3);
+	     System.out.println("finished " + Arrays.toString(test3));
+	     
+	     System.out.println("orginal " + Arrays.toString(test4));
+		 test4 = SequentialMerge.sort(test4);
+	     System.out.println("finished " + Arrays.toString(test4));
+	     
+	     System.out.println("orginal " + Arrays.toString(test5));
+		 test5 = SequentialMerge.sort(test5);
+	     System.out.println("finished " + Arrays.toString(test5));
+	     
+	     System.out.println("orginal " + Arrays.toString(test6));
+		 test6 = SequentialMerge.sort(test6);
+	     System.out.println("finished " + Arrays.toString(test6));
+	     
+     System.out.println("DONE");
+     long tEnd = System.currentTimeMillis();
+     long tDelta = tEnd - tStart;
+     double elapsedSeconds = tDelta / 1000.0;
+     System.out.println(elapsedSeconds);
+	        
 }
 }
