@@ -5,7 +5,6 @@ import java.util.Random;
 
 public class ConcurrentMerge extends Thread{
 	
-	
 	private int[] anArray;
 	
 	public ConcurrentMerge(int[] anArray) {
@@ -17,6 +16,46 @@ public class ConcurrentMerge extends Thread{
 	  at the end when we are merging
 	  */
 	
+//	  public void run() {
+//		  int length = anArray.length;
+//		  if (length != 1) {
+//		
+//		  int midpoint = length / 2;
+//		  int[] left = Arrays.copyOfRange(anArray, 0, midpoint); 
+//		  int[] right = Arrays.copyOfRange(anArray, midpoint, length);
+//		  
+//		  ConcurrentMerge leftT = new ConcurrentMerge(left);
+//		  ConcurrentMerge rightT = new ConcurrentMerge(right);
+//		  leftT.run();
+//		  rightT.run();
+//		  
+//		  try {
+//			leftT.join();
+//			rightT.join();
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		  merge(left, right);
+//	
+//		  System.out.println("left " + Arrays.toString(left));
+//		  System.out.println("right " + Arrays.toString(right));
+//		  System.out.println("entire " + Arrays.toString(anArray));
+//		  }
+//	  } 
+
+	 public static int[] sort(int[] aList) {
+		    int length = aList.length;
+		    if (length == 1) return aList; // when it is an array of 1, then we know that it is ready to merge
+		    int midpoint = length / 2;
+		    
+		    int[] left = Arrays.copyOfRange(aList, 0, midpoint);
+		    System.out.println("left " + Arrays.toString(left));
+		    int[] right = Arrays.copyOfRange(aList, midpoint, length);
+		    System.out.println("right " + Arrays.toString(right));
+		    return merge(sort(left), sort(right));
+		  }
+	 
 	  public void run() {
 		  int length = anArray.length;
 		  if (length != 1) {
@@ -103,8 +142,14 @@ public class ConcurrentMerge extends Thread{
 	     long tStart = System.currentTimeMillis();
 	     System.out.println("orginal " + Arrays.toString(test));
 		 
+
+//	     ConcurrentMerge test1 = new ConcurrentMerge(test);
+//	     test1.start();
+//	     test1.join();
+
 	     ConcurrentMerge test1 = new ConcurrentMerge(test);
 	     test1.join();
+
 	     
 	     System.out.println("finished " + Arrays.toString(test));
 	     
@@ -115,4 +160,6 @@ public class ConcurrentMerge extends Thread{
         System.out.println(elapsedSeconds);
 	        
 	}
+
 }
+
