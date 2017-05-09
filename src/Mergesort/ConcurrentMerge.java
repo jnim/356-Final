@@ -5,46 +5,19 @@ import java.util.Random;
 
 public class ConcurrentMerge extends Thread{
 	
-	private int[] anArray;
+	private int[] array;
 	
 	public ConcurrentMerge(int[] anArray) {
-		this.anArray = anArray;
+		array = anArray;
 	}
 	 /* 
 	  similar to sequential merge sort, but when calling
 	  mergesort, we need to create new thrads then join 
 	  at the end when we are merging
 	  */
-	
-//	  public void run() {
-//		  int length = anArray.length;
-//		  if (length != 1) {
-//		
-//		  int midpoint = length / 2;
-//		  int[] left = Arrays.copyOfRange(anArray, 0, midpoint); 
-//		  int[] right = Arrays.copyOfRange(anArray, midpoint, length);
-//		  
-//		  ConcurrentMerge leftT = new ConcurrentMerge(left);
-//		  ConcurrentMerge rightT = new ConcurrentMerge(right);
-//		  leftT.run();
-//		  rightT.run();
-//		  
-//		  try {
-//			leftT.join();
-//			rightT.join();
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		  merge(left, right);
-//	
-//		  System.out.println("left " + Arrays.toString(left));
-//		  System.out.println("right " + Arrays.toString(right));
-//		  System.out.println("entire " + Arrays.toString(anArray));
-//		  }
-//	  } 
 
 	 public static int[] sort(int[] aList) {
+		 
 		    int length = aList.length;
 		    if (length == 1) return aList; // when it is an array of 1, then we know that it is ready to merge
 		    int midpoint = length / 2;
@@ -53,36 +26,47 @@ public class ConcurrentMerge extends Thread{
 		    System.out.println("left " + Arrays.toString(left));
 		    int[] right = Arrays.copyOfRange(aList, midpoint, length);
 		    System.out.println("right " + Arrays.toString(right));
+		    
 		    return merge(sort(left), sort(right));
+		    
 		  }
 	 
-	  public void run() {
-		  int length = anArray.length;
-		  if (length != 1) {
-		
-		  int midpoint = length / 2;
-		  int[] left = Arrays.copyOfRange(anArray, 0, midpoint); 
-		  int[] right = Arrays.copyOfRange(anArray, midpoint, length);
+	  public void mergeSort() {
+		 int length = array.length;
+		 if (length > 1) {
+		 int midpoint = length / 2; 
 		  
-		  ConcurrentMerge leftT = new ConcurrentMerge(left);
-		  ConcurrentMerge rightT = new ConcurrentMerge(right);
-		  leftT.run();
-		  rightT.run();
+		 Thread firstHalf = new Thread (new Runnable () {
+				public void run () {
+		 
+		int[] left = Arrays.copyOfRange(array, 0, midpoint);
+	    System.out.println("left " + Arrays.toString(left));
+	    left = sort(left);
+				}
+		 });
+		 
+		 Thread secondHalf = new Thread (new Runnable () {
+				public void run () {
+					
+	    int[] right = Arrays.copyOfRange(array, midpoint, length);
+	    System.out.println("right " + Arrays.toString(right));
+	    right = sort(right);
+		 }
+		 });
 		
-		  
-		  try {
-			leftT.join();
-			rightT.join();
+	    
+	    firstHalf.start();
+	    secondHalf.start();
+	    
+	    try {
+			firstHalf.join();
+			secondHalf.join();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		  merge(left, right);
-		  
-		  System.out.println("left " + Arrays.toString(left));
-		  System.out.println("right " + Arrays.toString(right));
-		  System.out.println("entire " + Arrays.toString(anArray));
-		  }
+	    
+	  }
 	  }
 	  
 	  public static int[] merge(int[] left, int[] right) {
@@ -141,15 +125,7 @@ public class ConcurrentMerge extends Thread{
 	      
 	     long tStart = System.currentTimeMillis();
 	     System.out.println("orginal " + Arrays.toString(test));
-		 
-
-//	     ConcurrentMerge test1 = new ConcurrentMerge(test);
-//	     test1.start();
-//	     test1.join();
-
-	     ConcurrentMerge test1 = new ConcurrentMerge(test);
-	     test1.join();
-
+		 test = ConcurrentMerge.sort(test);
 	     
 	     System.out.println("finished " + Arrays.toString(test));
 	     
