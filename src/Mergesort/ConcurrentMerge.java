@@ -23,9 +23,9 @@ public class ConcurrentMerge extends Thread{
 		    int midpoint = length / 2;
 		    
 		    int[] left = Arrays.copyOfRange(aList, 0, midpoint);
-		    System.out.println("left " + Arrays.toString(left));
+		    //System.out.println("left " + Arrays.toString(left));
 		    int[] right = Arrays.copyOfRange(aList, midpoint, length);
-		    System.out.println("right " + Arrays.toString(right));
+		    //System.out.println("right " + Arrays.toString(right));
 		    
 		    return merge(sort(left), sort(right));
 		    
@@ -40,7 +40,7 @@ public class ConcurrentMerge extends Thread{
 				public void run () {
 		 
 		int[] left = Arrays.copyOfRange(array, 0, midpoint);
-	    System.out.println("left " + Arrays.toString(left));
+	    //System.out.println("left " + Arrays.toString(left));
 	    left = sort(left);
 				}
 		 });
@@ -49,7 +49,7 @@ public class ConcurrentMerge extends Thread{
 				public void run () {
 					
 	    int[] right = Arrays.copyOfRange(array, midpoint, length);
-	    System.out.println("right " + Arrays.toString(right));
+	    //System.out.println("right " + Arrays.toString(right));
 	    right = sort(right);
 		 }
 		 });
@@ -76,37 +76,22 @@ public class ConcurrentMerge extends Thread{
 	    int leftc = 0;
 	    int rightc = 0;
 	    for (int combinedc = 0; combinedc < combined.length; combinedc++) {
-	      //System.out.println("left[] " + Arrays.toString(left));
-	      //System.out.println("right[] " + Arrays.toString(right));
-	      //System.out.println("comb1 " + Arrays.toString(combined));
-		  //System.out.println(right[0]);
-		  //System.out.println(right[rightc]);
-		  //System.out.println(left[0]);
-		  //System.out.println(left[rightc]);
 	      if (leftc >= leftl) {
 	    	  int assign = right[rightc];
-	    	  //System.out.println("1! " + assign);
 	          combined[combinedc] = assign;
 	          rightc++;
-	          //System.out.println("comb2 " + Arrays.toString(combined));
 	      } else if (rightc >= rightl) {
 	    	  int assign = left[leftc];
-	    	  //System.out.println("2! " + assign);
 	    	  combined[combinedc] = assign;
 	          leftc++;
-	          //System.out.println("comb2 " + Arrays.toString(combined));
 	      } else if (left[leftc] <= right[rightc]) {
 	    	  int assign = left[leftc];
-	    	  //System.out.println("3! " + assign);
 		      combined[combinedc] = assign;
 		      leftc++;
-		      //System.out.println("comb2 " + Arrays.toString(combined));
 	      } else {
 	    	  int assign = right[rightc];
-	    	  //System.out.println("4! " + assign);
 	          combined[combinedc] = assign;
 	          rightc++;
-	          //System.out.println("comb2 " + Arrays.toString(combined));
 	    }
 	   
 	  }
@@ -114,20 +99,63 @@ public class ConcurrentMerge extends Thread{
 	}
 	  
 	  public static void main(String args[]) throws InterruptedException {
-//		  int[] test = {
-//				  1, 5, 2, 4, 3, 6, 7, 9
-//		  };
+
 		 Random number = new Random();
-	     int[] test = new int[100];
-	        for (int i = 0; i < test.length; i++) {
-	            test[i] = number.nextInt(1000);
+	     int[] test1 = new int[50000];
+	        for (int i = 0; i < test1.length; i++) {
+	            test1[i] = number.nextInt(1000);
 	        }
+	        
+        int[] test2 = new int[100000];
+        for (int i = 0; i < test2.length; i++) {
+            test2[i] = number.nextInt(1000);
+        }
 	      
+        int[] test3 = new int[150000];
+        for (int i = 0; i < test3.length; i++) {
+            test3[i] = number.nextInt(1000);
+        }
+        
+        int[] test4 = new int[200000];
+        for (int i = 0; i < test4.length; i++) {
+            test4[i] = number.nextInt(1000);
+        }
+        
+	    int[] test5 = new int[250000];
+	    for (int i = 0; i < test5.length; i++) {
+	        test5[i] = number.nextInt(1000);
+	    }
+	      
+	    int[] test6 = new int[300000];
+	    for (int i = 0; i < test6.length; i++) {
+	        test6[i] = number.nextInt(1000);
+	    }
+    
+        
 	     long tStart = System.currentTimeMillis();
-	     System.out.println("orginal " + Arrays.toString(test));
-		 test = ConcurrentMerge.sort(test);
+	     System.out.println("orginal " + Arrays.toString(test1));
+		 test1 = ConcurrentMerge.sort(test1);
+	     System.out.println("finished " + Arrays.toString(test1));
 	     
-	     System.out.println("finished " + Arrays.toString(test));
+	     System.out.println("orginal " + Arrays.toString(test2));
+		 test2 = ConcurrentMerge.sort(test2);
+	     System.out.println("finished " + Arrays.toString(test2));
+	     
+	     System.out.println("orginal " + Arrays.toString(test3));
+		 test3 = ConcurrentMerge.sort(test3);
+	     System.out.println("finished " + Arrays.toString(test3));
+	     
+	     System.out.println("orginal " + Arrays.toString(test4));
+		 test4 = ConcurrentMerge.sort(test4);
+	     System.out.println("finished " + Arrays.toString(test4));
+	     
+	     System.out.println("orginal " + Arrays.toString(test5));
+		 test5 = ConcurrentMerge.sort(test5);
+	     System.out.println("finished " + Arrays.toString(test5));
+	     
+	     System.out.println("orginal " + Arrays.toString(test6));
+		 test6 = ConcurrentMerge.sort(test6);
+	     System.out.println("finished " + Arrays.toString(test6));
 	     
         System.out.println("DONE");
         long tEnd = System.currentTimeMillis();
