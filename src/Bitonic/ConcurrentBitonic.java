@@ -1,32 +1,57 @@
 package Bitonic;
 
+import java.util.Arrays;
+import java.util.Random;
+
+import Mergesort.ConcurrentMerge;
+
 
 
 public class ConcurrentBitonic {
 	int[] array; 
+	
 		
 		public ConcurrentBitonic(int[] arraytosort){
 			array = arraytosort; 
 		}
 		
 		
-		static int sort(ConcurrentBitonic a, boolean increasing){
-			BitonicSort(a.array, 0, (a.array.length -1), (a.array.length/2), increasing); //call bitonicsort of the whole thing
-			//a.print(); 
+		int sort(boolean increasing){
+			ConcurrentBitonic a = this; 
+			Thread Start = new Thread (new Runnable () {
+				public void run () {
+					BitonicSort(a, 0, (array.length -1), (array.length/2), increasing); //call bitonicsort of the whole thing
+				}
+			}); 
+			long tStart = System.currentTimeMillis(); 
+			Start.start(); 
+			//a.print();
+			
+			try{
+				Start.join(); 
+			}catch(InterruptedException e){
+				e.printStackTrace(); 
+			}
+			long tEnd = System.currentTimeMillis();
+			long time = (tEnd - tStart);
+			boolean correctness = this.correct(); 
+			//print(); 
+			System.out.println("Sorted " + array.length + " elements in " + time + " milliseconds, answer correct = " + correctness + "\n"); 
 			return 0; 
 		}
 		
-		static int BitonicSort(int[] array, int start, int end, int increment, boolean increasing){
+		static int BitonicSort(ConcurrentBitonic a, int start, int end, int increment, boolean increasing){ 
+			
 			if (increment>=1){
 				Thread First_Half = new Thread (new Runnable () {
 					public void run () {
-						BitonicSort(array, start, start+(increment), increment/2, increasing); 
+						BitonicSort(a, start, start+(increment), increment/2, increasing); 
 					}
 					
 				});
 				Thread Second_Half = new Thread (new Runnable () {
 					public void run () {
-						BitonicSort(array, start+(increment), end, increment/2, !increasing);
+						BitonicSort(a, start+(increment), end, increment/2, !increasing);
 					}	
 				});
 				First_Half.start(); 
@@ -39,20 +64,20 @@ public class ConcurrentBitonic {
 					e.printStackTrace();
 				}
 				
-				BitonicMerge(array, start, end, increment, increasing); 
+				BitonicMerge(a, start, end, increment, increasing); 
 				
 			}
 			
 			return 0; 
 		}
-		static int BitonicMerge(int[] array, int start, int end, int count, boolean increasing){
+		static int BitonicMerge(ConcurrentBitonic a, int start, int end, int count, boolean increasing){
 			while(count>=1){
 				int i = start; 
 				while((i + count)<= end){
-					if((array[i]>array[i+count]&&increasing) ||(array[i]<array[i+count]&&!increasing)){
-						int temp = array[i]; 
-						array[i] = array[i + count]; 
-						array[i+count] = temp; 
+					if((a.array[i]>a.array[i+count]&&increasing) ||(a.array[i]<a.array[i+count]&&!increasing)){
+						int temp = a.array[i]; 
+						a.array[i] = a.array[i + count]; 
+						a.array[i+count] = temp; 
 					}
 						i++; //move index up 1 to compare next pair
 					
@@ -73,11 +98,102 @@ public class ConcurrentBitonic {
 				
 			}
 		}
-		public void main(){
+		
+		public boolean correct(){
+			int errors = 0; 
+			for (int i=1; (i<=(array.length-1)); i++){
+				if(array[i]<array[i-1])
+					errors++; 
+				}
+			if(errors==0){
+				return true;
+			}else{
+				return false; 
+			}
+				
+		}
+		/*public void main(){
 			int[] a = {4, 3, 2, 1};
 			ConcurrentBitonic Bit = new ConcurrentBitonic(a); 
 			sort(Bit, true); 
 			Bit.print(); 
+		}*/
+		public static void main(String args[]) throws InterruptedException {
+
+			 Random number = new Random();
+			  
+		     int[] test1 = new int[50000];
+		        for (int i = 0; i < test1.length; i++) {
+		            test1[i] = number.nextInt(1000);
+		        }
+		    ConcurrentBitonic One = new ConcurrentBitonic(test1); 
+		        
+	        int[] test2 = new int[100000];
+	        for (int i = 0; i < test2.length; i++) {
+	            test2[i] = number.nextInt(1000);
+	        }
+	        ConcurrentBitonic Two = new ConcurrentBitonic(test2);
+		      
+	        int[] test3 = new int[150000];
+	        for (int i = 0; i < test3.length; i++) {
+	            test3[i] = number.nextInt(1000);
+	        }
+	        ConcurrentBitonic Three = new ConcurrentBitonic(test3);
+	        
+	        int[] test4 = new int[200000];
+	        for (int i = 0; i < test4.length; i++) {
+	            test4[i] = number.nextInt(1000);
+	        }
+	        ConcurrentBitonic Four = new ConcurrentBitonic(test4);
+	        
+		    int[] test5 = new int[250000];
+		    for (int i = 0; i < test5.length; i++) {
+		        test5[i] = number.nextInt(1000);
+		    }
+		    ConcurrentBitonic Five = new ConcurrentBitonic(test5);
+		      
+		    int[] test6 = new int[300000];
+		    for (int i = 0; i < test6.length; i++) {
+		        test6[i] = number.nextInt(1000);
+		    }
+		    ConcurrentBitonic Six = new ConcurrentBitonic(test6);
+	    
+		    
+	         System.out.println("Starting test 1\n"); 
+			 One.sort(true);
+			/*Two.sort(true); 
+			 Three.sort(true);
+			 Four.sort(true);
+			 Five.sort(true);
+			 Six.sort(true);*/
+			 //long tEnd1 = System.currentTimeMillis();  
+		     
+		     /*System.out.println("orginal " + Arrays.toString(test2));
+			 test2 = ConcurrentMerge.sort(test2);
+		     System.out.println("finished " + Arrays.toString(test2));
+		     
+		     System.out.println("orginal " + Arrays.toString(test3));
+			 test3 = ConcurrentMerge.sort(test3);
+		     System.out.println("finished " + Arrays.toString(test3));
+		     
+		     System.out.println("orginal " + Arrays.toString(test4));
+			 test4 = ConcurrentMerge.sort(test4);
+		     System.out.println("finished " + Arrays.toString(test4));
+		     
+		     System.out.println("orginal " + Arrays.toString(test5));
+			 test5 = ConcurrentMerge.sort(test5);
+		     System.out.println("finished " + Arrays.toString(test5));
+		     
+		     System.out.println("orginal " + Arrays.toString(test6));
+			 test6 = ConcurrentMerge.sort(test6);
+		     System.out.println("finished " + Arrays.toString(test6));
+		     
+	        System.out.println("DONE");
+	        long tEnd = System.currentTimeMillis();
+	        //long tDelta = tEnd - tStart;
+	        double elapsedSeconds = tDelta / 1000.0;
+	        System.out.println(elapsedSeconds);*/
+		        
 		}
 	
 }
