@@ -9,6 +9,7 @@ public class BitonicTests {
 	
 	public static void main(String[] args){
 	String testtype = "Concurrent"; 
+	//String testtype = "Sequential"; 
 	int total = 64; 
 	int[] a = new int[total]; 
 	int val = total; 
@@ -22,11 +23,11 @@ public class BitonicTests {
 		val--;
 		}
 	}
-	System.out.println(Arrays.toString(a));// from https://www.mkyong.com/java/java-how-to-print-an-array/
+	//System.out.println(Arrays.toString(a));// from https://www.mkyong.com/java/java-how-to-print-an-array/
 	if(testtype == "Sequential"){
 	System.out.println("Running sequential test"); 
-	int max = 60000; 
-	for(int i = 10000; i<=max; i = i + 10000){
+	int max = 2000; 
+	for(int i = 2000; i<=max; i = i + 10000){
 		Random number = new Random();
 	  
 		int[] test1 = new int[i];
@@ -35,14 +36,14 @@ public class BitonicTests {
        }
        SequentialBitonic Bit = new SequentialBitonic(test1); 
        SequentialBitonic.sort(Bit, true); 
-       //Bit.print(); 
+       Bit.print(); 
 	}
 	}
 	
 	else if(testtype == "Concurrent"){
 	System.out.println("Running concurrent test");
-	int max = 70000; 
-	for(int i = 70000; i<=max; i = i + 1000){
+	int max = 1000000; 
+	for(int i = 50000; i<=max; i = i + 50000){
 		Random number = new Random();
 	  
 		int[] test1 = new int[i];

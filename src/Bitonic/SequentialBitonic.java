@@ -8,10 +8,10 @@ class SequentialBitonic{
 	}
 	
 	
-	static int sort(SequentialBitonic a, boolean increasing){
+	static int[] sort(SequentialBitonic a, boolean increasing){
 		BitonicSort(a.array, 0, (a.array.length -1), (a.array.length/2), increasing); //call bitonicsort of the whole thing
 		//a.print(); 
-		return 0; 
+		return a.array; 
 	}
 	
 	static int BitonicSort(int[] array, int start, int end, int increment, boolean increasing){
@@ -24,6 +24,8 @@ class SequentialBitonic{
 		
 		return 0; 
 	}
+	
+	
 	static int BitonicMerge(int[] array, int start, int end, int count, boolean increasing){
 		while(count>=1){
 			int i = start; 
@@ -58,4 +60,9 @@ class SequentialBitonic{
 		sort(Bit, true); 
 		Bit.print(); 
 		}
+	
+	
+	
+	//For use with concurrent program
+	 
 }

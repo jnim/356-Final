@@ -1,5 +1,5 @@
 package Bitonic;
-
+import Bitonic.SequentialBitonic; 
 import java.util.Arrays;
 import java.util.Random;
 
@@ -9,7 +9,6 @@ import Mergesort.ConcurrentMerge;
 
 public class ConcurrentBitonic {
 	int[] array; 
-	
 		
 		public ConcurrentBitonic(int[] arraytosort){
 			array = arraytosort; 
@@ -40,33 +39,39 @@ public class ConcurrentBitonic {
 		}
 		
 		static int BitonicSort(ConcurrentBitonic a, int start, int end, int increment, boolean increasing){ 
-			
-			if (increment>=1){
-				Thread First_Half = new Thread (new Runnable () {
-					public void run () {
-						BitonicSort(a, start, start+(increment), increment/2, increasing); 
+			if(a.array.length<1000){
+				if (increment>=1){
+					Thread First_Half = new Thread (new Runnable () {
+						public void run () {
+							BitonicSort(a, start, start+(increment), increment/2, increasing); 
+						}
+						
+					});
+					Thread Second_Half = new Thread (new Runnable () {
+						public void run () {
+							BitonicSort(a, start+(increment), end, increment/2, !increasing);
+						}	
+					});
+					First_Half.start(); 
+					Second_Half.start(); 
+					try {
+						; 
+						First_Half.join();
+						Second_Half.join();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-					
-				});
-				Thread Second_Half = new Thread (new Runnable () {
-					public void run () {
-						BitonicSort(a, start+(increment), end, increment/2, !increasing);
-					}	
-				});
-				First_Half.start(); 
-				Second_Half.start(); 
-				try {
-					; 
-					First_Half.join();
-					Second_Half.join();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
+			}/*else{
+				int[] arraytocopy = Arrays.copyOfRange(a.array, start, end); 
+				SequentialBitonic Bit = new SequentialBitonic(arraytocopy); 
+				SequentialBitonic.sort(Bit, true); 
 				
+			}*/
 				BitonicMerge(a, start, end, increment, increasing); 
 				
-			}
+			
 			
 			return 0; 
 		}
