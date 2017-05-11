@@ -61,10 +61,13 @@ public class SequentialMerge{
 
   public static void main(String args[]) {
 	  Random number = new Random();
+	  
 	     int[] test1 = new int[50000];
 	        for (int i = 0; i < test1.length; i++) {
-	            test1[i] = number.nextInt(1000);
+	            test1[i] = number.nextInt(1000000);
 	        }
+	        
+	 
 	        
      int[] test2 = new int[100000];
      for (int i = 0; i < test2.length; i++) {
@@ -93,35 +96,66 @@ public class SequentialMerge{
  
      
 	     long tStart = System.currentTimeMillis();
-	     System.out.println("orginal " + Arrays.toString(test1));
+	     System.out.println("original " + Arrays.toString(test1));
 		 test1 = SequentialMerge.sort(test1);
 	     System.out.println("finished " + Arrays.toString(test1));
 	     
-	     System.out.println("orginal " + Arrays.toString(test2));
+	     long tEnd = System.currentTimeMillis();
+	     long tDelta = tEnd - tStart;
+	     double elapsedSeconds = tDelta / 1000.0;
+	     System.out.println(elapsedSeconds);
+	     
+	     tStart = System.currentTimeMillis();
+	     //System.out.println("original " + Arrays.toString(test2));
 		 test2 = SequentialMerge.sort(test2);
-	     System.out.println("finished " + Arrays.toString(test2));
+	     //System.out.println("finished " + Arrays.toString(test2));
+	     tEnd = System.currentTimeMillis();
+	     tDelta = tEnd - tStart;
+	     elapsedSeconds = tDelta / 1000.0;
+	     System.out.println(elapsedSeconds);
 	     
-	     System.out.println("orginal " + Arrays.toString(test3));
+	     
+	     tStart = System.currentTimeMillis();
+	     //System.out.println("original " + Arrays.toString(test3));
 		 test3 = SequentialMerge.sort(test3);
-	     System.out.println("finished " + Arrays.toString(test3));
+	     //System.out.println("finished " + Arrays.toString(test3));
+	     tEnd = System.currentTimeMillis();
+	     tDelta = tEnd - tStart;
+	     elapsedSeconds = tDelta / 1000.0;
+	     System.out.println(elapsedSeconds);
 	     
-	     System.out.println("orginal " + Arrays.toString(test4));
+	     tStart = System.currentTimeMillis();
+	     //System.out.println("original " + Arrays.toString(test4));
 		 test4 = SequentialMerge.sort(test4);
-	     System.out.println("finished " + Arrays.toString(test4));
+	     //System.out.println("finished " + Arrays.toString(test4));
+	     tEnd = System.currentTimeMillis();
+	     tDelta = tEnd - tStart;
+	     elapsedSeconds = tDelta / 1000.0;
+	     System.out.println(elapsedSeconds);
 	     
-	     System.out.println("orginal " + Arrays.toString(test5));
+	     tStart = System.currentTimeMillis();
+	     //System.out.println("original " + Arrays.toString(test5));
 		 test5 = SequentialMerge.sort(test5);
-	     System.out.println("finished " + Arrays.toString(test5));
+	     //System.out.println("finished " + Arrays.toString(test5));
+	     tEnd = System.currentTimeMillis();
+	     tDelta = tEnd - tStart;
+	     elapsedSeconds = tDelta / 1000.0;
+	     System.out.println(elapsedSeconds);
 	     
-	     System.out.println("orginal " + Arrays.toString(test6));
+	     tStart = System.currentTimeMillis();
+	     //System.out.println("original " + Arrays.toString(test6));
 		 test6 = SequentialMerge.sort(test6);
-	     System.out.println("finished " + Arrays.toString(test6));
+	     //System.out.println("finished " + Arrays.toString(test6));
+	     tEnd = System.currentTimeMillis();
+	     tDelta = tEnd - tStart;
+	     elapsedSeconds = tDelta / 1000.0;
+	     System.out.println(elapsedSeconds);
 	     
      System.out.println("DONE");
-     long tEnd = System.currentTimeMillis();
-     long tDelta = tEnd - tStart;
-     double elapsedSeconds = tDelta / 1000.0;
-     System.out.println(elapsedSeconds);
+//     long tEnd = System.currentTimeMillis();
+//     long tDelta = tEnd - tStart;
+//     double elapsedSeconds = tDelta / 1000.0;
+//     System.out.println(elapsedSeconds);
 	        
 }
 }
