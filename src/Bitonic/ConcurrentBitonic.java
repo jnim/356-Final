@@ -33,10 +33,9 @@ public class ConcurrentBitonic {
 				e.printStackTrace(); 
 			}
 			long tEnd = System.currentTimeMillis();
-			long time = (tEnd - tStart);
-			boolean correctness = this.correct(); 
+			long time = (tEnd - tStart); 
 			//print(); 
-			System.out.println("Sorted " + array.length + " elements in " + time + " milliseconds, answer correct = " + correctness + "\n"); 
+			System.out.println("Sorted " + array.length + " elements in " + time + " milliseconds\n"); 
 			return 0; 
 		}
 		
@@ -57,6 +56,7 @@ public class ConcurrentBitonic {
 				First_Half.start(); 
 				Second_Half.start(); 
 				try {
+					; 
 					First_Half.join();
 					Second_Half.join();
 				} catch (InterruptedException e) {
@@ -122,50 +122,56 @@ public class ConcurrentBitonic {
 
 			 Random number = new Random();
 			  
-		     int[] test1 = new int[50000];
+		     int[] test1 = new int[10000];
 		        for (int i = 0; i < test1.length; i++) {
 		            test1[i] = number.nextInt(1000);
 		        }
 		    ConcurrentBitonic One = new ConcurrentBitonic(test1); 
 		        
-	        int[] test2 = new int[100000];
+	        int[] test2 = new int[20000];
 	        for (int i = 0; i < test2.length; i++) {
 	            test2[i] = number.nextInt(1000);
 	        }
 	        ConcurrentBitonic Two = new ConcurrentBitonic(test2);
 		      
-	        int[] test3 = new int[150000];
+	        int[] test3 = new int[30000];
 	        for (int i = 0; i < test3.length; i++) {
 	            test3[i] = number.nextInt(1000);
 	        }
 	        ConcurrentBitonic Three = new ConcurrentBitonic(test3);
 	        
-	        int[] test4 = new int[200000];
+	        int[] test4 = new int[40000];
 	        for (int i = 0; i < test4.length; i++) {
 	            test4[i] = number.nextInt(1000);
 	        }
 	        ConcurrentBitonic Four = new ConcurrentBitonic(test4);
 	        
-		    int[] test5 = new int[250000];
+		    int[] test5 = new int[50000];
 		    for (int i = 0; i < test5.length; i++) {
 		        test5[i] = number.nextInt(1000);
 		    }
 		    ConcurrentBitonic Five = new ConcurrentBitonic(test5);
 		      
-		    int[] test6 = new int[300000];
+		    int[] test6 = new int[60000];
 		    for (int i = 0; i < test6.length; i++) {
 		        test6[i] = number.nextInt(1000);
 		    }
 		    ConcurrentBitonic Six = new ConcurrentBitonic(test6);
 	    
+		    int[] test7 = new int[70000];
+		    for (int i = 0; i < test7.length; i++) {
+		        test7[i] = number.nextInt(1000);
+		    }
+		    ConcurrentBitonic Seven = new ConcurrentBitonic(test7);
 		    
-	         System.out.println("Starting test 1\n"); 
-			 One.sort(true);
-			/*Two.sort(true); 
-			 Three.sort(true);
-			 Four.sort(true);
-			 Five.sort(true);
-			 Six.sort(true);*/
+	         System.out.println("Starting test \n"); 
+			 //One.sort(true);
+			 //Two.sort(true); 
+			 //Three.sort(true);
+			 //Four.sort(true);
+			 //Five.sort(true);
+			 //Six.sort(true);
+	         Seven.sort(true); 
 			 //long tEnd1 = System.currentTimeMillis();  
 		     
 		     /*System.out.println("orginal " + Arrays.toString(test2));

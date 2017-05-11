@@ -1,0 +1,17 @@
+Bitonic Timing Results
+Concurrent: 
+
+Sorted 10000 elements in 1915 milliseconds
+Sorted 20000 elements in 11169 milliseconds
+Sorted 30000 elements in 13477 milliseconds
+Sorted 40000 elements in 55035 milliseconds
+Sorted 50000 elements in 52899 milliseconds
+Sorted 60000 elements in 59705 milliseconds
+
+Sorted 10000 elements in 1794 milliseconds
+Sorted 20000 elements in 11920 milliseconds
+Sorted 30000 elements in 9200 milliseconds
+Sorted 40000 elements in 38659 milliseconds
+Sorted 50000 elements in 46237 milliseconds
+Sorted 60000 elements in 41995 milliseconds
+

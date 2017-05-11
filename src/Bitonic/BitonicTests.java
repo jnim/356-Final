@@ -1,5 +1,6 @@
 package Bitonic;
 import java.util.Arrays;
+import java.util.Random;
 
 import Bitonic.SequentialBitonic;
 import Bitonic.ConcurrentBitonic; 
@@ -24,18 +25,35 @@ public class BitonicTests {
 	System.out.println(Arrays.toString(a));// from https://www.mkyong.com/java/java-how-to-print-an-array/
 	if(testtype == "Sequential"){
 	System.out.println("Running sequential test"); 
-	SequentialBitonic Bit = new SequentialBitonic(a); 
-	SequentialBitonic.sort(Bit, true); 
-	Bit.print(); 
-	//Bit.correct(); 
+	int max = 70000; 
+	for(int i = 10000; i<=max; i = i + 10000){
+		Random number = new Random();
+	  
+		int[] test1 = new int[i];
+       for (int j = 0; j < i; j++) {
+           test1[j] = number.nextInt(1000);
+       }
+       SequentialBitonic Bit = new SequentialBitonic(test1); 
+       SequentialBitonic.sort(Bit, true); 
+       //Bit.print(); 
+	}
 	}
 	
 	else if(testtype == "Concurrent"){
-	System.out.println("Running concurrent test"); 
-	ConcurrentBitonic Bit = new ConcurrentBitonic(a); 
-	ConcurrentBitonic.sort(Bit, true); 
-	Bit.print(); 
+	System.out.println("Running concurrent test");
+	int max = 70000; 
+	for(int i = 10000; i<=max; i = i + 10000){
+		Random number = new Random();
+	  
+		int[] test1 = new int[i];
+       for (int j = 0; j < i; j++) {
+           test1[j] = number.nextInt(1000);
+       }
+       ConcurrentBitonic Bit = new ConcurrentBitonic(test1); 
+       Bit.sort(true); 
+       //Bit.print(); 
 	}
 	
-	}	
+	}
+	}
 }
