@@ -63,11 +63,11 @@ public class SequentialOptimized {
 
 	  public static void main(String args[]) {
 		  int[] array = {
-				  1, 5, 2, 4, 3, 6, 7, 9
+				  1, 5, 2, 4, 3, 6, 7, 9, 4, 6, 1, 2, 0, 20, 5
 		  };
 		   
 		  SequentialOptimized test = new SequentialOptimized(array); 
-		  int[] answer = test.startsort(array, 0, array.length); 
+		  int[] answer = test.startsort(array, 0, array.length-1); 
 		  System.out.println("test " + Arrays.toString(answer));
 	}
 

@@ -25,7 +25,7 @@ public class BitonicTests {
 	System.out.println(Arrays.toString(a));// from https://www.mkyong.com/java/java-how-to-print-an-array/
 	if(testtype == "Sequential"){
 	System.out.println("Running sequential test"); 
-	int max = 70000; 
+	int max = 60000; 
 	for(int i = 10000; i<=max; i = i + 10000){
 		Random number = new Random();
 	  
@@ -42,7 +42,7 @@ public class BitonicTests {
 	else if(testtype == "Concurrent"){
 	System.out.println("Running concurrent test");
 	int max = 70000; 
-	for(int i = 10000; i<=max; i = i + 10000){
+	for(int i = 70000; i<=max; i = i + 1000){
 		Random number = new Random();
 	  
 		int[] test1 = new int[i];
