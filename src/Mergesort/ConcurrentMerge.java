@@ -1,9 +1,6 @@
 package Mergesort;
 
 import java.util.Arrays;
-import java.util.Random;
-
-import Bitonic.ConcurrentBitonic;
 
 public class ConcurrentMerge extends Thread{
 
@@ -29,30 +26,33 @@ public class ConcurrentMerge extends Thread{
 		int[] right = Arrays.copyOfRange(aList, midpoint, length);
 		//System.out.println("right " + Arrays.toString(right));
 
-		return merge(sort(left), sort(right));
+		return merge(mergeSort(left), mergeSort(right)); // changed to mergeSort
 
 	}
 
 	public static int[] mergeSort(int[] aList) {
 		int length = aList.length;
-		if (length > 1) {
+		if (length == 1) return aList;
+		//if (length > 1) {
 			int midpoint = length / 2; 
+		
 
 			Thread firstHalf = new Thread (new Runnable () {
 				public void run () {
 
 					int[] left = Arrays.copyOfRange(aList, 0, midpoint);
 					//System.out.println("left " + Arrays.toString(left));
-					left = sort(left);
+					left = mergeSort(left);
 				}
 			});
+
 
 			Thread secondHalf = new Thread (new Runnable () {
 				public void run () {
 
 					int[] right = Arrays.copyOfRange(aList, midpoint, length);
 					//System.out.println("right " + Arrays.toString(right));
-					right = sort(right);
+					right = mergeSort(right);
 				}
 			});
 
@@ -68,9 +68,13 @@ public class ConcurrentMerge extends Thread{
 				e.printStackTrace();
 			}
 
-		}
+		//}
+			
+			int[] left = Arrays.copyOfRange(aList, 0, midpoint);
+			int[] right = Arrays.copyOfRange(aList, midpoint, length);
 		
-		return aList;
+			return merge(sort(left), sort(right));
+		
 	}
 
 	public static int[] merge(int[] left, int[] right) {
@@ -105,40 +109,29 @@ public class ConcurrentMerge extends Thread{
 	public static void main(String args[]) throws InterruptedException {
 
 		Random number = new Random();
-		int[] test1 = new int[50000];
+		int[] test1 = new int[100];
 		for (int i = 0; i < test1.length; i++) {
 			test1[i] = number.nextInt(1000);
 		}
 
-		int[] test2 = new int[100000];
+		int[] test2 = new int[500];
 		for (int i = 0; i < test2.length; i++) {
 			test2[i] = number.nextInt(1000);
 		}
 
-		int[] test3 = new int[150000];
+		int[] test3 = new int[1000];
 		for (int i = 0; i < test3.length; i++) {
 			test3[i] = number.nextInt(1000);
 		}
 
-		int[] test4 = new int[200000];
+		int[] test4 = new int[1500];
 		for (int i = 0; i < test4.length; i++) {
 			test4[i] = number.nextInt(1000);
 		}
 
-		int[] test5 = new int[250000];
-		for (int i = 0; i < test5.length; i++) {
-			test5[i] = number.nextInt(1000);
-		}
-
-		int[] test6 = new int[300000];
-		for (int i = 0; i < test6.length; i++) {
-			test6[i] = number.nextInt(1000);
-		}
-
-
 		long tStart = System.currentTimeMillis();
-		System.out.println("original " + Arrays.toString(test1));
-		//test1 = test1.ConcurrentMerge.mergeSort();
+		//System.out.println("original " + Arrays.toString(test1));
+		test1 = ConcurrentMerge.sort(test1);
 		
 		System.out.println("finished " + Arrays.toString(test1));
 		long tEnd = System.currentTimeMillis();
@@ -146,10 +139,11 @@ public class ConcurrentMerge extends Thread{
 		double elapsedSeconds = tDelta / 1000.0;
 		System.out.println(elapsedSeconds);
 
+	
 		tStart = System.currentTimeMillis();
 		// System.out.println("original " + Arrays.toString(test2));
 		test2 = ConcurrentMerge.sort(test2);
-		// System.out.println("finished " + Arrays.toString(test2));
+		 System.out.println("finished " + Arrays.toString(test2));
 		tEnd = System.currentTimeMillis();
 		tDelta = tEnd - tStart;
 		elapsedSeconds = tDelta / 1000.0;
@@ -158,7 +152,7 @@ public class ConcurrentMerge extends Thread{
 		tStart = System.currentTimeMillis();
 		// System.out.println("original " + Arrays.toString(test3));
 		test3 = ConcurrentMerge.sort(test3);
-		// System.out.println("finished " + Arrays.toString(test3));
+		 System.out.println("finished " + Arrays.toString(test3));
 		tEnd = System.currentTimeMillis();
 		tDelta = tEnd - tStart;
 		elapsedSeconds = tDelta / 1000.0;
@@ -167,25 +161,7 @@ public class ConcurrentMerge extends Thread{
 		tStart = System.currentTimeMillis();
 		// System.out.println("original " + Arrays.toString(test4));
 		test4 = ConcurrentMerge.sort(test4);
-		//System.out.println("finished " + Arrays.toString(test4));
-		tEnd = System.currentTimeMillis();
-		tDelta = tEnd - tStart;
-		elapsedSeconds = tDelta / 1000.0;
-		System.out.println(elapsedSeconds);
-
-		tStart = System.currentTimeMillis();
-		// System.out.println("original " + Arrays.toString(test5));
-		test5 = ConcurrentMerge.sort(test5);
-		// System.out.println("finished " + Arrays.toString(test5));
-		tEnd = System.currentTimeMillis();
-		tDelta = tEnd - tStart;
-		elapsedSeconds = tDelta / 1000.0;
-		System.out.println(elapsedSeconds);
-
-		tStart = System.currentTimeMillis();
-		//System.out.println("original " + Arrays.toString(test6));
-		test6 = ConcurrentMerge.sort(test6);
-		// System.out.println("finished " + Arrays.toString(test6));
+		System.out.println("finished " + Arrays.toString(test4));
 		tEnd = System.currentTimeMillis();
 		tDelta = tEnd - tStart;
 		elapsedSeconds = tDelta / 1000.0;
@@ -213,4 +189,3 @@ public class ConcurrentMerge extends Thread{
 	}
 
 }
-
