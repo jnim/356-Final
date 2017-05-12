@@ -1,17 +1,119 @@
 Bitonic Timing Results
-Concurrent: 
+		Concurrent: 
 
-Sorted 10000 elements in 1915 milliseconds
-Sorted 20000 elements in 11169 milliseconds
-Sorted 30000 elements in 13477 milliseconds
-Sorted 40000 elements in 55035 milliseconds
-Sorted 50000 elements in 52899 milliseconds
-Sorted 60000 elements in 59705 milliseconds
+	Yao:
+Starting sort
+2	0
+All done sort
+Correct!
+Starting sort
+4	0
+All done sort
+Correct!
+Starting sort
+8	0
+All done sort
+Correct!
+Starting sort
+16	0
+All done sort
+Correct!
+Starting sort
+32	0
+All done sort
+Correct!
+Starting sort
+64	0
+All done sort
+Correct!
+Starting sort
+128	1
+All done sort
+Correct!
+Starting sort
+256	0
+All done sort
+Correct!
+Starting sort
+512	1
+All done sort
+Correct!
+Starting sort
+1024	2
+All done sort
+Correct!
+Starting sort
+2048	0
+All done sort
+Correct!
+Starting sort
+4096	12
+All done sort
+Correct!
+Starting sort
+8192	6
+All done sort
+Correct!
+Starting sort
+16384	2
+All done sort
+Correct!
+Starting sort
+32768	5
+All done sort
+Correct!
+Starting sort
+65536	9
+All done sort
+Correct!
+Starting sort
+131072	21
+All done sort
+Correct!
+Starting sort
+262144	45
+All done sort
+Correct!
+Starting sort
+524288	100
+All done sort
+Correct!
+Starting sort
+1048576	205
+All done sort
+Correct!
+Starting sort
+2097152	435
+All done sort
+Correct!
+Starting sort
+4194304	937
+All done sort
+Correct!
+Starting sort
+8388608	2107
+All done sort
+Correct!
+Starting sort
+16777216	2894
+All done sort
+Correct!
+Starting sort
+33554432	4498
+All done sort
+Correct!
+Starting sort
+67108864	9625
+All done sort
+Correct!
+Starting sort
+134217728	21728
+All done sort
+Correct!
+Starting sort
+268435456	45900
 
-Sorted 10000 elements in 1794 milliseconds
-Sorted 20000 elements in 11920 milliseconds
-Sorted 30000 elements in 9200 milliseconds
-Sorted 40000 elements in 38659 milliseconds
-Sorted 50000 elements in 46237 milliseconds
-Sorted 60000 elements in 41995 milliseconds
+	Keller:
 
+
+Sequential

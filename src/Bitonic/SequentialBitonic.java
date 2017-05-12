@@ -8,25 +8,44 @@ class SequentialBitonic{
 	}
 	
 	
-	static int[] sort(SequentialBitonic a, boolean increasing){
+	static int sort(SequentialBitonic a, boolean increasing){
+		long tStart = System.currentTimeMillis(); 
 		BitonicSort(a.array, 0, (a.array.length -1), (a.array.length/2), increasing); //call bitonicsort of the whole thing
 		//a.print(); 
-		return a.array; 
-	}
-	
-	static int BitonicSort(int[] array, int start, int end, int increment, boolean increasing){
-		if (increment>=1){
-			BitonicSort(array, start, start+(increment), increment/2, increasing); 
-			BitonicSort(array, start+(increment), end, increment/2, !increasing);
-			BitonicMerge(array, start, end, increment, increasing); 
-			
-		}
-		
+		long tEnd = System.currentTimeMillis();
+		long time = (tEnd - tStart); 
+		//print(); 
+		System.out.println(a.array.length + "\t" + time); 
 		return 0; 
 	}
 	
+	static int BitonicSort(int[] array, int start, int end, int increment, boolean increasing){
+		if (increment>1){
+			BitonicSort(array, start, start+(increment)-1, increment/2, true); 
+			BitonicSort(array, start+(increment), end, increment/2, false);
+			 
+			
+		}
+		BitonicMerge(array, start, end, increment, increasing);
 	
-	static int BitonicMerge(int[] array, int start, int end, int count, boolean increasing){
+		return 0; 
+	}
+	
+	public boolean correct(){
+		int errors = 0; 
+		for (int i=1; (i<=(array.length-1)); i++){
+			if(array[i]<array[i-1])
+				errors++; 
+			}
+		if(errors==0){
+			return true;
+		}else{
+			return false; 
+		}
+			
+	}
+	
+	static int BitonicMerge(int[] array, int start, int end, int count, boolean increasing){ 
 		while(count>=1){
 			int i = start; 
 			while((i + count)<= end){

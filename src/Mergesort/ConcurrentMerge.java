@@ -1,6 +1,7 @@
 package Mergesort;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class ConcurrentMerge extends Thread{
 
